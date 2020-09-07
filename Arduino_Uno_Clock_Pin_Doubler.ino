@@ -94,10 +94,12 @@ void setup() {
 }
 
 ISR(ANALOG_COMP_vect) {
-  if (!(PINB & _BV (1))) {  //Read state of pin 9
-    PORTB |= _BV (0);       //If pin 9 is LOW set pin 8 HIGH
+  if (!(PINB & _BV (1))) { /*Read state of pin 9*/
+    asm ( "nop \n" );      /*Wait a little */
+    PORTB |= _BV (0);      /*If pin 9 is LOW set pin 8 HIGH*/
   } else {
-    PORTB &= ~_BV (0);      //If pin 9 is HIGH set pin 8 LOW
+    asm ( "nop \n" );      /*Wait a little */
+    PORTB &= ~_BV (0);     /*If pin 9 is HIGH set pin 8 LOW*/
   }
 }
 
